@@ -55,22 +55,22 @@ def checkserial(serial_input):
     status = "Too short" if len(serial_input) < 11 else ("Too long" if len(serial_input) > 14 else None)
 
     if not status:
-        first_part = serial_input[0:4].upper()
-        second_part = serial_input[3:10].upper()
-        category_serials = SERIALS.get(first_part)
+      first_part = serial_input[0:4].upper()
+      second_part = serial_input[3:10].upper()
+      category_serials = SERIALS.get(first_part)
 
         if category_serials:
-            second_part = re.sub(digit_regex, '0', second_part)
-            serial_part = int(second_part)
-            
-            for serial in sorted(category_serials.keys()):
-                if serial_part > int(serial):
-                    continue
-                else:
-                    status = SERIALS.get(first_part, {}).get(serial, "Patched :(")
-                    break
+          second_part = re.sub(digit_regex, '0', second_part)
+          serial_part = int(second_part)
+          
+          for serial in sorted(category_serials.keys()):
+            if serial_part > int(serial):
+                continue
+            else:
+                status = SERIALS.get(first_part, {}).get(serial, "Patched :(")
+                break
 
-                status = STATUSMAP.get(status, "Error :O")
+          status = STATUSMAP.get(status, "Error :O")
 
         else:
             status = "incorrect"
